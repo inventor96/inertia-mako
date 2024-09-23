@@ -1,0 +1,24 @@
+{
+    "name": "inventor96/inertia-mako",
+    "type": "library",
+    "description": "The Mako adapter for Inertia.js.",
+    "keywords": ["mako", "inertia"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Caleb Hornbeck",
+            "homepage": "https://github.com/inventor96",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "inventor96\\Inertia\\": "src"
+        }
+    },
+    "require": {
+        "php": "~8.1.0|~8.2.0|~8.3.0",
+        "ext-json": "*",
+        "mako/framework": "^10.0"
+    }
+}
