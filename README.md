@@ -147,7 +147,7 @@ You will probably want to create your own `html_template` at some point in your 
 - `$tags`: The HTML tags for Vite resources. It contains three string properties: `js`, `css`, and `preload`. You have to use at least the `js` property somewhere for Inertia to work.
 
 Here is the default page used in this `inertia-mako` package:
-```php
+```phtml
 <html>
 <head>
     <meta charset="utf-8" />
