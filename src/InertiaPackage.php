@@ -5,19 +5,8 @@ use mako\application\Package;
 use mako\view\ViewFactory;
 
 class InertiaPackage extends Package {
-	/**
-	 * Package name.
-	 *
-	 * @var string
-	 */
-	protected $packageName = 'inventor96/inertia-mako';
-
-	/**
-	 * Package namespace.
-	 *
-	 * @var string
-	 */
-	protected $fileNamespace = 'inertia';
+	protected string $packageName = 'inventor96/inertia-mako';
+	protected string $fileNamespace = 'inertia';
 
 	/**
 	 * @inheritDoc
