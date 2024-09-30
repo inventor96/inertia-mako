@@ -43,8 +43,8 @@ class InertiaRenderer implements RendererInterface {
 			[
 				'page' => $page,
 				'title' => $this->config->get('inertia::inertia.title', 'Loading...'),
-				'css_path' => $this->config->get('inertia::inertia.css_path', '/css/app.css'),
-				'js_path' => $this->config->get('inertia::inertia.js_path', '/js/app.js'),
+				'css_path' => $this->config->get('inertia::inertia.css_path', '/assets/css/app.css'),
+				'js_path' => $this->config->get('inertia::inertia.js_path', '/assets/js/app.js'),
 			]
 		);
 	}

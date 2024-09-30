@@ -15,11 +15,11 @@ return [
 	 * The path to the css for the browser to load.
 	 * Only applicable if using the default view.
 	 */
-	'css_path' => '/css/app.css',
+	'css_path' => '/assets/css/app.css',
 
 	/**
 	 * The path to the js for the browser to load.
 	 * Only applicable if using the default view.
 	 */
-	'js_path' => '/js/app.js',
+	'js_path' => '/assets/js/app.js',
 ];

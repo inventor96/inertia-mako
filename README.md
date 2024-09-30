@@ -41,19 +41,20 @@ return [
 	 * The path to the css for the browser to load.
 	 * Only applicable if using the default view.
 	 */
-	'css_path' => '/css/app.css',
+	'css_path' => '/assets/css/app.css',
 
 	/**
 	 * The path to the js for the browser to load.
 	 * Only applicable if using the default view.
 	 */
-	'js_path' => '/js/app.js',
+	'js_path' => '/assets/js/app.js',
 ];
 ```
 
 ## Asset Versioning
 Inertia.js features [asset versioning](https://inertiajs.com/the-protocol#asset-versioning) to mitigate stale client-side caching. To indicate the server-side version, create a file at `app/config/packages/inertia/version.php` that functions like the following:
 ```php
+<?php
 return '1.0';
 ```
 
