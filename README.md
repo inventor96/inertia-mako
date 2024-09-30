@@ -3,94 +3,94 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
 
 ## Installation
 1. Install the composer and npm packages:
-	```bash
-	composer require inventor96/inertia-mako
-	npm install @inertiajs/inertia @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue
-	```
+    ```bash
+    composer require inventor96/inertia-mako
+    npm install @inertiajs/inertia @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue
+    ```
 
-	Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
+    Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
 
 1. Set other npm configs:
-	`package.json`:
-	```json
-	{
-		"private": true,
-		"type": "module",
-		"scripts": {
-			"dev": "vite",
-			"build": "vite build",
-			"serve": "vite preview"
-		},
-		"dependencies": {
-			...
-		}
-	}
-	```
+    `package.json`:
+    ```json
+    {
+        "private": true,
+        "type": "module",
+        "scripts": {
+            "dev": "vite",
+            "build": "vite build",
+            "serve": "vite preview"
+        },
+        "dependencies": {
+            ...
+        }
+    }
+    ```
 
 1. Create the vite config:
-	`vite.config.js`:
-	```js
-	import { defineConfig } from 'vite';
-	import laravel from 'laravel-vite-plugin';
-	import vue from '@vitejs/plugin-vue';
-	
-	export default defineConfig({
-		plugins: [
-			laravel({
-				input: 'app/resources/js/app.js',
-				refresh: true,
-			}),
-			vue({
-				template: {
-					transformAssetUrls: {
-						base: null,
-						includeAbsolute: false,
-					},
-				},
-			}),
-		],
-		resolve: {
-			alias: {
-				'@': 'app/resources/js',
-			},
-		},
-	});
-	```
+    `vite.config.js`:
+    ```js
+    import { defineConfig } from 'vite';
+    import laravel from 'laravel-vite-plugin';
+    import vue from '@vitejs/plugin-vue';
+    
+    export default defineConfig({
+        plugins: [
+            laravel({
+                input: 'app/resources/js/app.js',
+                refresh: true,
+            }),
+            vue({
+                template: {
+                    transformAssetUrls: {
+                        base: null,
+                        includeAbsolute: false,
+                    },
+                },
+            }),
+        ],
+        resolve: {
+            alias: {
+                '@': 'app/resources/js',
+            },
+        },
+    });
+    ```
 
 1. Create the JS app file:
-	`app/resources/js/app.js`:
-	```js
-	import { createApp, h } from 'vue'
-	import { createInertiaApp } from '@inertiajs/vue3'
-	import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+    `app/resources/js/app.js`:
+    ```js
+    import { createApp, h } from 'vue'
+    import { createInertiaApp } from '@inertiajs/vue3'
+    import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 
-	createInertiaApp({
-		resolve: (name) => resolvePageComponent(`../views/Pages/${name}.vue`, import.meta.glob('../views/Pages/**/*.vue')),
-		setup({ el, App, props, plugin }) {
-			createApp({ render: () => h(App, props) })
-				.use(plugin)
-				.mount(el)
-		},
-	})
-	```
+    createInertiaApp({
+        resolve: (name) => resolvePageComponent(`../views/Pages/${name}.vue`, import.meta.glob('../views/Pages/**/*.vue')),
+        setup({ el, App, props, plugin }) {
+            createApp({ render: () => h(App, props) })
+                .use(plugin)
+                .mount(el)
+        },
+    })
+    ```
 
 1. Enable the package in Mako:  
-	`app/config/application.php`:
-	```php
-	[
-		'packages' => [
-			'web' => [
-				inventor96\Inertia\InertiaPackage::class,
-			],
-		],
-	];
-	```
+    `app/config/application.php`:
+    ```php
+    [
+        'packages' => [
+            'web' => [
+                inventor96\Inertia\InertiaPackage::class,
+            ],
+        ],
+    ];
+    ```
 
 1. Register the middleware:
-	`app/http/routing/middleware.php`:
-	```php
-	$dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaMiddleware::class);
-	```
+    `app/http/routing/middleware.php`:
+    ```php
+    $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaMiddleware::class);
+    ```
 
 ## Configuration
 If you would like to override the default configuration, create a new file at `app/config/packages/inertia/inertia.php`.
@@ -99,16 +99,16 @@ The following configuration items and their defaults are as follows:
 ```php
 <?php
 return [
-	/**
-	 * The view to use when rendering the full HTML page
-	 * for the initial response to the browser.
-	 */
-	'html_template' => 'inertia::default',
+    /**
+     * The view to use when rendering the full HTML page
+     * for the initial response to the browser.
+     */
+    'html_template' => 'inertia::default',
 
-	/**
-	 * The initial title for the full HTML page.
-	 */
-	'title' => 'Loading...',
+    /**
+     * The initial title for the full HTML page.
+     */
+    'title' => 'Loading...',
 ];
 ```
 
@@ -116,27 +116,27 @@ For vite-specific configurations, create a `vite.php` config file in the same di
 ```php
 <?php
 return [
-	/**
-	 * The path to the manifest file generated by Vite.
-	 * Only needed if you change the default path in Vite,
-	 * otherwise the key should be omitted entirely.
-	 */
-	//'manifest' => null,
+    /**
+     * The path to the manifest file generated by Vite.
+     * Only needed if you change the default path in Vite,
+     * otherwise the key should be omitted entirely.
+     */
+    //'manifest' => null,
 
-	/**
-	 * The path to the hot module replacement file generated
-	 * by Vite. Only needed if you change the default path in
-	 * Vite, otherwise the key should be omitted entirely.
-	 */
-	//'hot_file' => null,
+    /**
+     * The path to the hot module replacement file generated
+     * by Vite. Only needed if you change the default path in
+     * Vite, otherwise the key should be omitted entirely.
+     */
+    //'hot_file' => null,
 
-	/**
-	 * The base path for the Vite assets. Should match the
-	 * `base` option in your Vite configuration, but could
-	 * also point to a CDN or other asset server, if you are
-	 * serving assets from a different domain.
-	 */
-	'base_path' => '/',
+    /**
+     * The base path for the Vite assets. Should match the
+     * `base` option in your Vite configuration, but could
+     * also point to a CDN or other asset server, if you are
+     * serving assets from a different domain.
+     */
+    'base_path' => '/',
 ];
 ```
 
@@ -150,15 +150,15 @@ Here is the default page used in this `inertia-mako` package:
 ```php
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-	<title>{{ $title }}</title>
-	{{ raw:$tags->preload }}
-	{{ raw:$tags->css }}
-	{{ raw:$tags->js }}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>{{ $title }}</title>
+    {{ raw:$tags->preload }}
+    {{ raw:$tags->css }}
+    {{ raw:$tags->js }}
 </head>
 <body>
-	<div id="app" data-page='{{ raw:$page }}'></div>
+    <div id="app" data-page='{{ raw:$page }}'></div>
 </body>
 </html>
 ```
@@ -168,15 +168,15 @@ The idea of this InertiaJS adapter is to utilize existing Mako framework functio
 
 ```
 app/
-	resources/
-		views/
-			Components/
-				...
-			Layouts/
-				...
-			Pages/
-				Welcome.vue
-				...
+    resources/
+        views/
+            Components/
+                ...
+            Layouts/
+                ...
+            Pages/
+                Welcome.vue
+                ...
 ```
 
 In your routes or controllers, you can use the Mako `ViewFactory::render()` method to handle the InertiaJS response, prefixing the path with `Pages/`. e.g. `$view->render('Pages/Welcome')`.
