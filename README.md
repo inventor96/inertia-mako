@@ -4,6 +4,8 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
 ## Installation
 1. Install the composer and npm packages:
     ```bash
+    composer create-project mako/app <project-name> # from mako's documentation
+    cd <project-name>
     composer require inventor96/inertia-mako
     npm install @inertiajs/inertia @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue --save-dev
     ```
