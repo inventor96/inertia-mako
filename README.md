@@ -62,16 +62,21 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     ```js
     import { createApp, h } from 'vue'
     import { createInertiaApp } from '@inertiajs/vue3'
-    import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+    // import Default from '@/Layouts/Default.vue' // uncomment if you want to use a default layout
 
     createInertiaApp({
-        resolve: (name) => resolvePageComponent(`../views/Pages/${name}.vue`, import.meta.glob('../views/Pages/**/*.vue')),
+        resolve: (name) => {
+            const pages = import.meta.glob('../views/Pages/**/*.vue', { eager: true });
+            let page = pages[`../views/Pages/${name}.vue`];
+            // page.default.layout = page.default.layout || Default; // uncomment if you want to use a default layout
+            return page;
+        },
         setup({ el, App, props, plugin }) {
             createApp({ render: () => h(App, props) })
                 .use(plugin)
-                .mount(el)
+                .mount(el);
         },
-    })
+    });
     ```
 
 1. Enable the package in Mako:  
