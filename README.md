@@ -10,8 +10,8 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
 
     Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel, or just changing the name while the underlying code is untouched. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
 
-1. Set other npm configs:
-    `package.json`:
+1. Set other npm configs:  
+    `package.json`
     ```json
     {
         "private": true,
@@ -27,8 +27,8 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     }
     ```
 
-1. Create the vite config:
-    `vite.config.js`:
+1. Create the vite config:  
+    `vite.config.js`
     ```js
     import { defineConfig } from 'vite';
     import laravel from 'laravel-vite-plugin';
@@ -57,8 +57,8 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     });
     ```
 
-1. Create the JS app file:
-    `app/resources/js/app.js`:
+1. Create the JS app file:  
+    `app/resources/js/app.js`
     ```js
     import { createApp, h } from 'vue'
     import { createInertiaApp } from '@inertiajs/vue3'
@@ -75,7 +75,7 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     ```
 
 1. Enable the package in Mako:  
-    `app/config/application.php`:
+    `app/config/application.php`
     ```php
     [
         'packages' => [
@@ -86,8 +86,8 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     ];
     ```
 
-1. Register the middleware:
-    `app/http/routing/middleware.php`:
+1. Register the middleware:  
+    `app/http/routing/middleware.php`
     ```php
     $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaMiddleware::class);
     ```
