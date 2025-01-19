@@ -51,7 +51,7 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
         ],
         resolve: {
             alias: {
-                '@': 'app/resources/js',
+                '@': path.resolve(__dirname, 'app/resources/views'),
             },
         },
     });
