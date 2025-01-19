@@ -5,10 +5,10 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
 1. Install the composer and npm packages:
     ```bash
     composer require inventor96/inertia-mako
-    npm install @inertiajs/inertia @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue
+    npm install @inertiajs/inertia @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue --save-dev
     ```
 
-    Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
+    Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel, or just changing the name while the underlying code is untouched. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
 
 1. Set other npm configs:
     `package.json`:
