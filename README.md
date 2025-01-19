@@ -23,9 +23,7 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
             "build": "vite build",
             "serve": "vite preview"
         },
-        "dependencies": {
-            ...
-        }
+        ...
     }
     ```
 
@@ -35,7 +33,7 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
     import { defineConfig } from 'vite';
     import laravel from 'laravel-vite-plugin';
     import vue from '@vitejs/plugin-vue';
-    
+
     export default defineConfig({
         plugins: [
             laravel({
@@ -102,8 +100,10 @@ The following configuration items and their defaults are as follows:
 <?php
 return [
     /**
-     * The view to use when rendering the full HTML page
-     * for the initial response to the browser.
+     * The view to use when rendering the full HTML page for the
+     * initial response to the browser. This config is relative
+     * to the `app/resources/views` directory.
+     * e.g. `'app'` would resolve to `resources/views/app.tpl.php`.
      */
     'html_template' => 'inertia::default',
 
@@ -192,4 +192,4 @@ Inertia.js features [asset versioning](https://inertiajs.com/the-protocol#asset-
 return ['1.0'];
 ```
 
-You can make that file do whatever you need to come up with your verison. The only requirement is that it ultimately returns an array with a single string value.
+You can make that file do whatever you need to come up with your verison. The only requirement is that it ultimately returns an array with a single string value (the array is requirement is due to how Mako configs work).
