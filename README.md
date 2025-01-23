@@ -165,7 +165,7 @@ Here is the default page used in this `inertia-mako` package:
     {{ raw:$tags->js }}
 </head>
 <body>
-    <div id="app" data-page='{{ raw:$page }}'></div>
+    <div id="app" data-page="{{ attribute:$page }}"></div>
 </body>
 </html>
 ```
