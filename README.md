@@ -198,3 +198,26 @@ return ['1.0'];
 ```
 
 You can make that file do whatever you need to come up with your verison. The only requirement is that it ultimately returns an array with a single string value (the array is requirement is due to how Mako configs work).
+
+### Commit Hash Versioning
+One common way to version assets is to use the commit hash of the current git commit. You can do this by creating a file at `app/config/packages/inertia/version.php` that looks like this:
+```php
+<?php
+$head_file = file_get_contents(__DIR__ . '/../../../../.git/HEAD');
+if (strpos($head_file, 'ref: ') === 0) {
+    $ref_file = trim(substr($head_file, 5));
+    if (file_exists(__DIR__.'/../../../../.git/' . $ref_file)) {
+        $commit_hash = trim(file_get_contents(__DIR__.'/../../../../.git/' . $ref_file));
+    } else {
+        // this fallback will only be used if the git commit hash cannot be found.
+        // this will cause a full page load on almost every request, so it's not ideal.
+        // hopefully this will only be used when you first create your repo, and never again once you've made your first commit.
+        $commit_hash = date('YmdHis');
+    }
+} else {
+    $commit_hash = trim($head_file);
+}
+return [$commit_hash];
+```
+
+This approach checks the filesystem rather than using the `git` command, so it should work on any system that has a `.git` directory. If you are using a CI/CD pipeline, you may need to adjust the path to the `.git` directory.
