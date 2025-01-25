@@ -20,5 +20,5 @@ return [
 	 * also point to a CDN or other asset server, if you are
 	 * serving assets from a different domain.
 	 */
-	'base_path' => '/',
+	'base_path' => '/build/',
 ];

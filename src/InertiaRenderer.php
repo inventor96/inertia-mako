@@ -74,7 +74,7 @@ class InertiaRenderer implements RendererInterface {
 
 		return new Manifest(
 			$hot,
-			$this->config->get('inertia::vite.manifest', $this->app->getPath() . '/../public/manifest.json'),
+			$this->config->get('inertia::vite.manifest', $this->app->getPath() . '/../public/build/manifest.json'),
 			$hot
 				? $this->file_system->get($this->getHotFile()) . '/'
 				: $this->config->get('inertia::vite.base_path', '/'),

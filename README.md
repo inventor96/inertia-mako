@@ -1,6 +1,8 @@
 # Inertia.js Mako Adapter
 An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako framework](https://makoframework.com/).
 
+The examples below are for Vue.js.
+
 ## Installation
 1. Install the composer and npm packages:
     ```bash
@@ -53,6 +55,10 @@ An [Inertia.js](https://inertiajs.com/) server-side adapter for the PHP [Mako fr
             alias: {
                 '@': path.resolve(__dirname, 'app/resources/views'),
             },
+        },
+        build: {
+            outDir: 'public/build',
+            assetsDir: 'assets',
         },
     });
     ```
@@ -143,7 +149,7 @@ return [
      * also point to a CDN or other asset server, if you are
      * serving assets from a different domain.
      */
-    'base_path' => '/',
+    'base_path' => '/build/',
 ];
 ```
 
