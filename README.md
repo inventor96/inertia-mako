@@ -35,6 +35,7 @@ The examples below are for Vue.js.
     import { defineConfig } from 'vite';
     import laravel from 'laravel-vite-plugin';
     import vue from '@vitejs/plugin-vue';
+    import path from 'path';
 
     export default defineConfig({
         plugins: [
@@ -74,7 +75,10 @@ The examples below are for Vue.js.
         resolve: (name) => {
             const pages = import.meta.glob('../views/Pages/**/*.vue', { eager: true });
             let page = pages[`../views/Pages/${name}.vue`];
-            // page.default.layout = page.default.layout || Default; // uncomment if you want to use a default layout
+            // uncomment if you want to use a default layout
+            /* if (page.default.layout === undefined) {
+                page.default.layout = Default;
+            } */
             return page;
         },
         setup({ el, App, props, plugin }) {
