@@ -101,9 +101,10 @@ The examples below are for Vue.js.
     ];
     ```
 
-1. Register the middleware:  
+1. Register the middlewares:  
     `app/http/routing/middleware.php`
     ```php
+    $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaInputValidation::class);
     $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaMiddleware::class);
     ```
 
