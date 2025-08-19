@@ -107,6 +107,11 @@ The examples below are for Vue.js.
     $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaCsrf::class);
     $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaInputValidation::class);
     $dispatcher->registerGlobalMiddleware(inventor96\Inertia\InertiaMiddleware::class);
+
+    // optionally, define the middleware order. e.g.:
+    $dispatcher->setMiddlewarePriority(inventor96\Inertia\InertiaCsrf::class, 50);
+    $dispatcher->setMiddlewarePriority(inventor96\Inertia\InertiaInputValidation::class, 60);
+    $dispatcher->setMiddlewarePriority(inventor96\Inertia\InertiaMiddleware::class, 70);
     ```
 
 ## Configuration
