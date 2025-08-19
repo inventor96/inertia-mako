@@ -6,11 +6,13 @@ use Closure;
 use mako\http\Request;
 use mako\http\Response;
 use mako\http\routing\middleware\MiddlewareInterface;
+use mako\session\Session;
 
 class InertiaMiddleware implements MiddlewareInterface
 {
 	public function __construct(
 		protected Inertia $inertia,
+		protected ?Session $session = null,
 	) {}
 
 	public function execute(Request $request, Response $response, Closure $next): Response {
@@ -21,7 +23,7 @@ class InertiaMiddleware implements MiddlewareInterface
 			&& $request->headers->get('X-Inertia')
 			&& $request->headers->get('X-Inertia-Version') !== $this->inertia->getVersion())
 		{
-			// TODO: handle re-flashing
+			$this->session?->reflash();
 			return $this->inertia->location($request->getPath());
 		}
 
