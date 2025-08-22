@@ -114,6 +114,20 @@ The examples below are for Vue.js.
     $dispatcher->setMiddlewarePriority(inventor96\Inertia\InertiaMiddleware::class, 70);
     ```
 
+1. Create a JSconfig so your IDE knows where things are (optional):
+    `jsconfig.json`
+    ```json
+    {
+        "compilerOptions": {
+            "baseUrl": ".",
+            "paths": {
+                "@/*": ["app/resources/views/*"]
+            }
+        },
+        "exclude": ["node_modules", "public"]
+    }
+    ```
+
 ## Configuration
 If you would like to override the default configuration, create a new file at `app/config/packages/inertia/inertia.php`.
 
