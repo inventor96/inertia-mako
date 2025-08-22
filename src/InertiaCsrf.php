@@ -11,6 +11,7 @@ use mako\http\response\senders\Redirect;
 use mako\http\routing\middleware\MiddlewareInterface;
 use mako\http\routing\URLBuilder;
 use mako\session\Session;
+use mako\utility\Arr;
 
 class InertiaCsrf implements MiddlewareInterface
 {
@@ -64,10 +65,19 @@ class InertiaCsrf implements MiddlewareInterface
 			
 			// check if the token is invalid
 			if (empty($req_token) || !$this->session->validateOneTimeToken($req_token)) {
-				// check if we should use the errors prop or throw an exception
-				if ($this->config->get('inertia::csrf.use_errors_prop', false)) {
+				// check if we should use a prop or throw an exception
+				if ($prop = $this->config->get('inertia::csrf.use_prop', false)) {
+					// handle nested props
+					$parts = explode('.', $prop, 2);
+					if (count($parts) > 1) {
+						$flash = $this->session->getFlash($parts[0], []);
+						Arr::set($flash, $parts[1], 'The page was expired. Please try again.');
+					} else {
+						$flash = 'The page was expired. Please try again.'; // no refresh needed when using a prop
+					}
+
 					// set the error message
-					$this->session->putFlash('inertia_errors', ['The page was expired. Please try again.']); // no refresh needed when using errors prop
+					$this->session->putFlash($parts[0], $flash);
 
 					// redirect back to the previous page with errors
 					return $response->setBody(new Redirect($this->urlBuilder->current(), Redirect::SEE_OTHER));

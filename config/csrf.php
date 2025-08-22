@@ -2,12 +2,15 @@
 <?php
 return [
 	/*
-	 * Whether to use the errors prop for token validation
-	 * errors. By default, an exception will be thrown. If
-	 * the error should be returned via the Inertia `errors`
-	 * prop, set this to true.
+	 * Use a shared page prop for passing CSRF errors to the
+	 * frontend. When set to `false`, the middleware will
+	 * throw an `InvalidTokenException`. If set to any other
+	 * value, the middleware will populate that prop with the
+	 * CSRF error message. Dot notation can be used to set
+	 * nested props. To tap into the form validation errors,
+	 * you can use the `inertia_errors` prop.
 	 */
-	'use_errors_prop' => false,
+	'use_prop' => false,
 
 	/*
 	 * The lifetime of the cookie in seconds. 0 means "until
