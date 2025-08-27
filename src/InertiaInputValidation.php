@@ -37,8 +37,8 @@ class InertiaInputValidation implements MiddlewareInterface
 			// flash the validation errors to the session
 			$this->session->putFlash('inertia_errors', $e->getErrors());
 
-			// redirect back to the previous page with errors
-			return $response->setBody(new Redirect($this->urlBuilder->current(), Redirect::SEE_OTHER));
+			// redirect back to the previous page with errors, fallback to the current page
+			return $response->setBody(new Redirect($request->getReferrer($this->urlBuilder->current()), Redirect::SEE_OTHER));
 		}
 	}
 }
