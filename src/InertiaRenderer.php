@@ -53,12 +53,13 @@ class InertiaRenderer implements RendererInterface {
 	}
 
 	protected function getInertiaObject(string $view, array $data): string {
+		$q = http_build_query($this->request->getQuery()->all());
 		return json_encode([
 			'component' => $this->getVueView($view),
 			'props' => $data,
-			'url' => $this->request->getPath(),
+			'url' => $this->request->getPath() . ($q ? '?' . $q : ''),
 			'version' => $this->inertia->getVersion(),
-		]);
+		], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
 	}
 
 	protected function getVueView(string $view): string {
