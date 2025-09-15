@@ -24,7 +24,8 @@ class InertiaMiddleware implements MiddlewareInterface
 			&& $request->headers->get('X-Inertia-Version') !== $this->inertia->getVersion())
 		{
 			$this->session?->reflash();
-			return $this->inertia->location($request->getPath());
+			$q = http_build_query($request->getQuery()->all());
+			return $this->inertia->location($request->getPath() . ($q ? '?' . $q : ''));
 		}
 
 		return $next($request, $response);
