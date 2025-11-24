@@ -16,6 +16,9 @@ class InertiaMiddleware implements MiddlewareInterface
 	) {}
 
 	public function execute(Request $request, Response $response, Closure $next): Response {
+		// add inertia vary header
+		$response->headers->add('Vary', 'X-Inertia');
+
 		// validate inertia version
 		if (
 			$request->isAjax()
