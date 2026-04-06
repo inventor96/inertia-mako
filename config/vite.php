@@ -15,10 +15,11 @@ return [
 	//'hot_file' => null,
 
 	/**
-	 * The base path for the Vite assets. Should match the
-	 * `base` option in your Vite configuration, but could
-	 * also point to a CDN or other asset server, if you are
-	 * serving assets from a different domain.
+	 * The base path for the Vite assets. Should match vue's
+	 * `template.transformAssetUrls.base` option in your Vite
+	 * configuration, but could also point to a CDN or other
+	 * asset server, if you are serving assets from a different
+	 * domain.
 	 */
-	'base_path' => '/build/',
+	//'base_path' => '/',
 ];
