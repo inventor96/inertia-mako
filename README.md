@@ -255,7 +255,7 @@ return [
 ### Using a Custom `html_template`
 You will probably want to create your own `html_template` at some point in your project. You can do so with any renderer of your choosing (other than the `InertiaRenderer`). For example, to use a standard Mako template, you could create a file at `app/resources/views/app.tpl.php`, and then update the `inertia.php` config file to set `'html_template' => 'app'`.
 
-There are 3 values passed to the template from the `InertiaRenderer`. You can add to these using built-in Mako functionality.
+There are 3 values passed to the template from the `InertiaRenderer`. You can add to these using built-in Mako functionality and assigning props to the template.
 - `$page`: The JSON Inertia page object. You have to use this somewhere for Inertia to work.
 - `$tags`: The HTML tags for Vite resources. It contains three string properties: `js`, `css`, and `preload`. You have to use at least the `js` property somewhere for Inertia to work.
 
@@ -276,7 +276,7 @@ Here is the default page used in this `inertia-mako` package:
 ```
 
 ## Coding Your App
-The idea of this InertiaJS adapter is to utilize existing Mako framework functionality. As such, it's built to have the Vue files be organized under `app/resources/views/`. Pages should be under the `Pages/` folder. For example:
+The idea of this InertiaJS adapter is to utilize existing Mako framework functionality. As such, it's built to have the Vue files be organized under `app/resources/views/`. Pages could be under the `Pages/` folder. For example:
 
 ```
 app/
@@ -293,7 +293,7 @@ app/
 
 In your routes or controllers, you can use the Mako `ViewFactory::render()` method to handle the InertiaJS response, prefixing the path with `Pages/`. e.g. `$view->render('Pages/Welcome')`.
 
-The `Inertia` class is registered in the Mako dependency injection container under the `inertia` key. So as an alternative to using the `ViewFactory` with the path prefix, you call `$this->inertia->render('Welcome')`. This is just a wrapper around the original method, so there's really no difference under the hood. It's just there for personal preference sake.
+The `Inertia` class is registered in the Mako dependency injection container under the `inertia` key. So as an alternative to using the `ViewFactory` with the path prefix, you call `$this->inertia->render('Welcome')`. This is just a wrapper around the original method, so there's really no difference under the hood besides an automatic `Pages/` prefix. It's just there for personal preference sake.
 
 ## Asset Versioning
 Inertia.js features [asset versioning](https://inertiajs.com/the-protocol#asset-versioning) to mitigate stale client-side caching. To indicate the server-side version, create a file at `app/config/packages/inertia/version.php` that functions like the following:
