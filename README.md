@@ -150,11 +150,6 @@ return [
      * e.g. `'app'` would resolve to `resources/views/app.tpl.php`.
      */
     'html_template' => 'inertia::default',
-
-    /**
-     * The initial title for the full HTML page.
-     */
-    'title' => 'Loading...',
 ];
 ```
 
@@ -261,7 +256,6 @@ return [
 You will probably want to create your own `html_template` at some point in your project. You can do so with any renderer of your choosing (other than the `InertiaRenderer`). For example, to use a standard Mako template, you could create a file at `app/resources/views/app.tpl.php`, and then update the `inertia.php` config file to set `'html_template' => 'app'`.
 
 There are 3 values passed to the template from the `InertiaRenderer`. You can add to these using built-in Mako functionality.
-- `$title`: Just a pass-thru of the `title` config var above. This is optional to use.
 - `$page`: The JSON Inertia page object. You have to use this somewhere for Inertia to work.
 - `$tags`: The HTML tags for Vite resources. It contains three string properties: `js`, `css`, and `preload`. You have to use at least the `js` property somewhere for Inertia to work.
 
@@ -271,7 +265,6 @@ Here is the default page used in this `inertia-mako` package:
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>{{ $title }}</title>
     {{ raw:$tags->preload }}
     {{ raw:$tags->css }}
     {{ raw:$tags->js }}
