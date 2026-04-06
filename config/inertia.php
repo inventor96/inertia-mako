@@ -5,9 +5,4 @@ return [
 	 * for the initial response to the browser.
 	 */
 	'html_template' => 'inertia::default',
-
-	/**
-	 * The initial title for the full HTML page.
-	 */
-	'title' => 'Loading...',
 ];

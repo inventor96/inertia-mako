@@ -46,7 +46,6 @@ class InertiaRenderer implements RendererInterface {
 			$this->config->get('inertia::inertia.html_template', 'inertia::default'),
 			[
 				'page' => $page,
-				'title' => $this->config->get('inertia::inertia.title', 'Loading...'),
 				'tags' => $vite_manifest->createTags('app/resources/js/app.js'),
 			]
 		);
