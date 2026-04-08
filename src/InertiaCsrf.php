@@ -81,7 +81,10 @@ class InertiaCsrf implements MiddlewareInterface
 					$this->session->putFlash($parts[0], $flash);
 
 					// redirect back to the previous page with errors
-					return $response->setBody(new Redirect($this->urlBuilder->current(), Status::SeeOther ?? Status::SEE_OTHER));
+					return $response->setBody(new Redirect(
+						$this->urlBuilder->current(),
+						defined(Status::class . '::SeeOther') ? Status::SeeOther : Status::SEE_OTHER,
+					));
 				} else {
 					// throw an exception
 					throw new InvalidTokenException('The page was expired. Please refresh the page and try again.');
