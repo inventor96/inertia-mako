@@ -9,7 +9,7 @@ The examples below are for Vue.js.
     composer create-project mako/app <project-name> # from mako's documentation
     cd <project-name>
     composer require inventor96/inertia-mako
-    npm install --save-dev @inertiajs/vue3 @vitejs/plugin-vue laravel-vite-plugin vite vue
+    npm install --save-dev @inertiajs/vue3 @inertiajs/vite @vitejs/plugin-vue laravel-vite-plugin vite vue
     ```
 
     Yes, the laravel vite plugin is intentional. We could create our own, but that would pretty much be reinventing the wheel, or just changing the name while the underlying code is untouched. Note that when running `npm run dev` later, the Laravel plugin will report the `APP_URL` as undefined, but that's OK for our situation. 
@@ -34,6 +34,7 @@ The examples below are for Vue.js.
     ```js
     import { defineConfig } from 'vite';
     import laravel from 'laravel-vite-plugin';
+    import inertia from '@inertiajs/vite';
     import vue from '@vitejs/plugin-vue';
     import path from 'path';
 
@@ -43,6 +44,7 @@ The examples below are for Vue.js.
                 input: 'app/resources/js/app.js',
                 refresh: true,
             }),
+            inertia(),
             vue({
                 template: {
                     transformAssetUrls: {
@@ -75,25 +77,10 @@ The examples below are for Vue.js.
 1. Create the JS app file:  
     `app/resources/js/app.js`
     ```js
-    import { createApp, h } from 'vue'
     import { createInertiaApp } from '@inertiajs/vue3'
-    // import Default from '@/Layouts/Default.vue' // uncomment if you want to use a default layout
 
     createInertiaApp({
-        resolve: (name) => {
-            const pages = import.meta.glob('../views/Pages/**/*.vue', { eager: true });
-            let page = pages[`../views/Pages/${name}.vue`];
-            // uncomment if you want to use a default layout
-            /* if (page.default.layout === undefined) {
-                page.default.layout = Default;
-            } */
-            return page;
-        },
-        setup({ el, App, props, plugin }) {
-            createApp({ render: () => h(App, props) })
-                .use(plugin)
-                .mount(el);
-        },
+        pages: '../views/Pages',
     });
     ```
 
@@ -127,9 +114,8 @@ The examples below are for Vue.js.
     ```json
     {
         "compilerOptions": {
-            "baseUrl": ".",
             "paths": {
-                "@/*": ["app/resources/views/*"]
+                "@/*": ["./app/resources/views/*"]
             }
         },
         "exclude": ["node_modules", "public"]
