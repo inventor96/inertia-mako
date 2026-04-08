@@ -270,9 +270,16 @@ Here is the default page used in this `inertia-mako` package:
     {{ raw:$tags->js }}
 </head>
 <body>
-    <div id="app" data-page="{{ attribute:$page }}"></div>
+    <noscript>Your browser does not support JavaScript or it is disabled. Please enable JavaScript to use this application.</noscript>
+    <script data-page="app" type="application/json">{{ raw:$page }}</script>
+    <div id="app"></div>
 </body>
 </html>
+```
+
+If you are using Inertia v2, you will need to change the way the page data is passed to the frontend. Instead of using a script tag, you should populate a `data-page` attribute on your mount element. For example:
+```html
+<div id="app" data-page="{{ attribute:$page }}"></div>
 ```
 
 ## Coding Your App
