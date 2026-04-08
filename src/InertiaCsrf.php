@@ -8,6 +8,7 @@ use mako\http\exceptions\InvalidTokenException;
 use mako\http\Request;
 use mako\http\Response;
 use mako\http\response\senders\Redirect;
+use mako\http\response\Status;
 use mako\http\routing\middleware\MiddlewareInterface;
 use mako\http\routing\URLBuilder;
 use mako\session\Session;
@@ -80,7 +81,7 @@ class InertiaCsrf implements MiddlewareInterface
 					$this->session->putFlash($parts[0], $flash);
 
 					// redirect back to the previous page with errors
-					return $response->setBody(new Redirect($this->urlBuilder->current(), Redirect::SEE_OTHER));
+					return $response->setBody(new Redirect($this->urlBuilder->current(), Status::SeeOther ?? Status::SEE_OTHER));
 				} else {
 					// throw an exception
 					throw new InvalidTokenException('The page was expired. Please refresh the page and try again.');

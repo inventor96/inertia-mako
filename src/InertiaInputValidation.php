@@ -6,6 +6,7 @@ use Closure;
 use mako\http\Request;
 use mako\http\Response;
 use mako\http\response\senders\Redirect;
+use mako\http\response\Status;
 use mako\http\routing\middleware\MiddlewareInterface;
 use mako\http\routing\URLBuilder;
 use mako\session\Session;
@@ -38,7 +39,7 @@ class InertiaInputValidation implements MiddlewareInterface
 			$this->session->putFlash('inertia_errors', $e->getErrors());
 
 			// redirect back to the previous page with errors, fallback to the current page
-			return $response->setBody(new Redirect($request->getReferrer($this->urlBuilder->current()), Redirect::SEE_OTHER));
+			return $response->setBody(new Redirect($request->getReferrer($this->urlBuilder->current()), Status::SeeOther ?? Status::SEE_OTHER));
 		}
 	}
 }

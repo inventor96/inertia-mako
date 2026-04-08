@@ -21,7 +21,7 @@ class Inertia {
 	 * @return Response The response object.
 	 */
 	public function location(string $url): Response {
-		$this->response->setStatus(Status::CONFLICT);
+		$this->response->setStatus(Status::Conflict ?? Status::CONFLICT);
 		$this->response->headers->add('X-Inertia-Location', $url);
 		return $this->response;
 	}
