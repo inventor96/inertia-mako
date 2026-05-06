@@ -10,9 +10,6 @@ use mako\view\renderers\RendererInterface;
 use mako\view\ViewFactory;
 use mindplay\vite\Manifest;
 
-/**
- * @property string $path This is only here to make the IDE happy; the actual property is protected in the `ViewFactory` class.
- */
 class InertiaRenderer implements RendererInterface {
 	protected string $hot_file;
 
@@ -63,8 +60,9 @@ class InertiaRenderer implements RendererInterface {
 
 	protected function getVueView(string $view): string {
 		return str_replace([
-			(fn() => $this->path)->call($this->view_factory) . '/', // remove the view factory's base path
-			'Pages/', // remove the pages folder
+			(function() { /** @var ViewFactory $this */ return $this->path; })->call($this->view_factory) . DIRECTORY_SEPARATOR, // remove the view factory's base path
+			'Pages/', // remove the pages folder - unix
+			'Pages\\', // remove the pages folder - windows
 			'.vue', // remove the file extension
 		], '', $view);
 	}
