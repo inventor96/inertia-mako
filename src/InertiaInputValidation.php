@@ -19,6 +19,7 @@ class InertiaInputValidation implements MiddlewareInterface
 		protected URLBuilder $urlBuilder,
 		protected Session $session,
 		protected ViewFactory $viewFactory,
+		protected Inertia $inertia,
 	) {
 	}
 	
@@ -28,9 +29,11 @@ class InertiaInputValidation implements MiddlewareInterface
 		$bag = $request->headers->get('X-Inertia-Error-Bag');
 
 		// assign validation errors to the view (e.g. for the request after a redirect)
-		$this->viewFactory->assign('errors', $bag
-			? [$bag => $this->session->getFlash('inertia_errors')]
-			: $this->session->getFlash('inertia_errors'));
+		$this->inertia->share([
+			'errors' => $bag
+				? [$bag => $this->session->getFlash('inertia_errors')]
+				: $this->session->getFlash('inertia_errors'),
+		]);
 
 		try {
 			return $next($request, $response);
