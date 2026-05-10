@@ -53,6 +53,7 @@ class InertiaRenderer implements RendererInterface {
 		return json_encode([
 			'component' => $this->getVueView($view),
 			'props' => $data,
+			'sharedProps' => $this->inertia->getShareKeys(),
 			'url' => $this->request->getPath() . ($q ? '?' . $q : ''),
 			'version' => $this->inertia->getVersion(),
 		], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
