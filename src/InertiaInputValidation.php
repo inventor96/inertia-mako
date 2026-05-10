@@ -31,8 +31,8 @@ class InertiaInputValidation implements MiddlewareInterface
 		// assign validation errors to the view (e.g. for the request after a redirect)
 		$this->inertia->share([
 			'errors' => $bag
-				? [$bag => $this->session->getFlash('inertia_errors')]
-				: $this->session->getFlash('inertia_errors'),
+				? [$bag => $this->session->getFlash('inertia_errors', [])]
+				: $this->session->getFlash('inertia_errors', []),
 		]);
 
 		try {
