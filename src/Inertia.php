@@ -91,11 +91,11 @@ class Inertia {
 	protected function getShareData(): array {
 		// collect shared data, including executing any closures
 		$data = [];
-		foreach ($this->share_data as $item) {
+		foreach ($this->share_data as $key => $item) {
 			if ($item instanceof \Closure) {
 				$data = array_merge($data, $item());
 			} else {
-				$data = array_merge($data, $item);
+				$data = array_merge($data, [$key => $item]);
 			}
 		}
 

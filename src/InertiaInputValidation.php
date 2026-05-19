@@ -20,9 +20,8 @@ class InertiaInputValidation implements MiddlewareInterface
 		protected Session $session,
 		protected ViewFactory $viewFactory,
 		protected Inertia $inertia,
-	) {
-	}
-	
+	) {}
+
 	public function execute(Request $request, Response $response, Closure $next): Response
 	{
 		// check for error bag request
