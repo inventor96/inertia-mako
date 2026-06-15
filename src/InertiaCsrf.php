@@ -82,7 +82,7 @@ class InertiaCsrf implements MiddlewareInterface
 
 					// redirect back to the previous page with errors
 					return $response->setBody(new Redirect(
-						$this->urlBuilder->current(),
+						$request->getReferrer() ?? $this->urlBuilder->current(),
 						defined(Status::class . '::SeeOther') ? Status::SeeOther : Status::SEE_OTHER,
 					));
 				} else {
