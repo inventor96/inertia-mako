@@ -165,6 +165,14 @@ return [
      * domain.
      */
     //'base_path' => '/',
+
+    /**
+     * Whether to force the use of the base path even when
+     * running in hot module replacement (HMR) mode. This is
+     * useful if you are serving assets from a different domain
+     * than your application, and you want to avoid CORS issues.
+     */
+    //'force_base_path' => false,
 ];
 ```
 

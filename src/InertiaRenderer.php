@@ -70,11 +70,12 @@ class InertiaRenderer implements RendererInterface {
 
 	protected function getViteManifest(): Manifest {
 		$hot = $this->isHot();
+		$force_base = $this->config->get('inertia::vite.force_base_path', false);
 
 		return new Manifest(
 			$hot,
 			$this->config->get('inertia::vite.manifest', $this->app->getPath() . '/../public/manifest.json'),
-			$hot
+			$hot && !$force_base
 				? $this->file_system->get($this->getHotFile()) . '/'
 				: $this->config->get('inertia::vite.base_path', '/'),
 		);
