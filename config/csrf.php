@@ -13,8 +13,16 @@ return [
 	'use_prop' => false,
 
 	/*
+	 * The lifetime of the CSRF token in seconds. Must be
+	 * greater than 0.
+	 */
+	'token_ttl' => 3600,
+
+	/*
 	 * The lifetime of the cookie in seconds. 0 means "until
-	 * the browser is closed".
+	 * the browser is closed". If greater than 0, it must be
+	 * at least as long as the CSRF token's lifetime, otherwise
+	 * it may expire in the browser prematurely.
 	 */
 	'cookie_ttl' => 0,
 
