@@ -183,22 +183,6 @@ class InertiaCsrf implements MiddlewareInterface
 	 */
 	protected function getRedirectUrl(Request $request): string
 	{
-		$current = $this->urlBuilder->current();
-		$referrer = $request->getReferrer();
-		$referrerParts = is_string($referrer) ? parse_url($referrer) : false;
-		$currentParts = parse_url($current);
-
-		if (
-			is_array($referrerParts)
-			&& is_array($currentParts)
-			&& isset($referrerParts['scheme'], $referrerParts['host'])
-			&& ($referrerParts['scheme'] === $currentParts['scheme'])
-			&& ($referrerParts['host'] === $currentParts['host'])
-			&& (($referrerParts['port'] ?? null) === ($currentParts['port'] ?? null))
-		) {
-			return $referrer;
-		}
-
-		return $current;
+		return RedirectDestination::safe($request, $this->urlBuilder->current());
 	}
 }

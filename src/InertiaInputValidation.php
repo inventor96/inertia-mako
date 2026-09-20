@@ -42,7 +42,7 @@ class InertiaInputValidation implements MiddlewareInterface
 
 			// redirect back to the previous page with errors, fallback to the current page
 			return $response->setBody(new Redirect(
-				$request->getReferrer($this->urlBuilder->current()),
+				RedirectDestination::safe($request, $this->urlBuilder->current()),
 				defined(Status::class . '::SeeOther') ? Status::SeeOther : Status::SEE_OTHER,
 			));
 		}
