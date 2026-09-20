@@ -49,6 +49,10 @@ class InertiaRenderer implements RendererInterface {
 	}
 
 	protected function getInertiaObject(string $view, array $data): string {
+		// the view factory merges its own globals into the view data, so
+		// remove them from the page props before sending them to the client
+		$data = array_diff_key($data, ['__charset__' => true, '__viewfactory__' => true, '_csp_nonce_' => true]);
+
 		$q = http_build_query($this->request->getQuery()->all());
 		return json_encode([
 			'component' => $this->getVueView($view),
