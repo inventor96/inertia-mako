@@ -120,7 +120,7 @@ class InertiaRenderer implements RendererInterface {
 			'sharedProps' => $this->inertia->getShareKeys(),
 			'url' => $this->request->getPath() . ($q ? '?' . $q : ''),
 			'version' => $this->inertia->getVersion(),
-		], JSON_THROW_ON_ERROR);
+		], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP);
 	}
 
 	protected function getVueView(string $view): string {
