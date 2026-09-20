@@ -228,13 +228,13 @@ return [
         /*
          * Indicates that the cookie should only be
          * transmitted over a secure HTTPS connection from
-         * the client. When TRUE, the cookie will only be
-         * set if a secure connection exists. When omitted,
-         * this option defaults to the request protocol, so
-         * the cookie is automatically set to secure on
-         * HTTPS requests.
+         * the client. When omitted, this option defaults to
+         * the request protocol, so the cookie is
+         * automatically set to secure on HTTPS requests.
+         * Set to `true` or `false` to override this behavior,
+         * e.g. `'secure' => false` for plain-HTTP development.
          */
-        'secure' => false,
+        //'secure' => false,
 
         /*
          * When TRUE the cookie will be made accessible only
