@@ -56,7 +56,7 @@ class InertiaRenderer implements RendererInterface {
 			'sharedProps' => $this->inertia->getShareKeys(),
 			'url' => $this->request->getPath() . ($q ? '?' . $q : ''),
 			'version' => $this->inertia->getVersion(),
-		], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+		], JSON_THROW_ON_ERROR);
 	}
 
 	protected function getVueView(string $view): string {
