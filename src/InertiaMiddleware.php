@@ -19,6 +19,9 @@ class InertiaMiddleware implements MiddlewareInterface
 		// add inertia vary header
 		$response->headers->add('Vary', 'X-Inertia');
 
+		// prevent shared caches from storing session-scoped page data
+		$response->headers->add('Cache-Control', 'private, no-cache');
+
 		// validate inertia version
 		if (
 			$request->isAjax()
