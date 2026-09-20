@@ -299,6 +299,8 @@ The `InertiaRenderer` supports nonce-based CSP policies. When Mako's `ContentSec
 ],
 ```
 
+The name of the view variable that carries the nonce is configurable via the `csp_nonce_var` option in your `inertia.php` config file, and defaults to `_csp_nonce_`. Set it to `false` to disable nonce support entirely.
+
 Note that the inline `<script type="application/json">` element that carries the Inertia page object does **not** require a nonce. Script elements with a non-JavaScript `type` are not executed by the browser and are therefore exempt from `script-src`, so the page data embedded in the default template needs no modification.
 
 ### HMR Caveat
