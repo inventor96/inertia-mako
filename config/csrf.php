@@ -47,11 +47,11 @@ return [
 		/*
 		 * Indicates that the cookie should only be
 		 * transmitted over a secure HTTPS connection from
-		 * the client. When set to TRUE, the cookie will
-		 * only be set if a secure connection exists. On
-		 * the server-side, it's on the programmer to send
-		 * this kind of cookie only on secure connection
-		 * (e.g. with respect to $this->request->isSecure()).
+		 * the client. When TRUE, the cookie will only be
+		 * set if a secure connection exists. When omitted,
+		 * this option defaults to the request protocol, so
+		 * the cookie is automatically set to secure on
+		 * HTTPS requests.
 		 */
 		'secure' => false,
 

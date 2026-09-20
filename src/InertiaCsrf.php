@@ -36,7 +36,8 @@ class InertiaCsrf implements MiddlewareInterface
 	protected const FAKE_TOKEN = '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&:0';
 
 	/**
-	 * @var array An array of default options for the CSRF cookie.
+	 * @var array The default options for the CSRF cookie. The `secure` option
+	 *     is overridden with the request protocol unless explicitly configured.
 	 */
 	protected const COOKIE_OPTIONS = [
 		'path' => '/',
@@ -121,13 +122,21 @@ class InertiaCsrf implements MiddlewareInterface
 		// call the next middleware/handler
 		$response = $next($request, $response);
 
+		// merge configured cookie options with the defaults, defaulting
+		// the Secure flag to the request's protocol unless explicitly set
+		$configured = $this->config->get('inertia::csrf.cookie_options', []);
+		$cookie_options = array_merge(self::COOKIE_OPTIONS, $configured);
+		if (!isset($configured['secure'])) {
+			$cookie_options['secure'] = $request->isSecure();
+		}
+
 		// set new CSRF token
 		/** @var Response $response */
 		$response->cookies->addSigned(
 			'XSRF-TOKEN',
 			$this->getDerivedSessionId() . ':' . time(),
 			$this->cookieTtl,
-			array_merge(self::COOKIE_OPTIONS, $this->config->get('inertia::csrf.cookie_options', [])),
+			$cookie_options,
 		);
 
 		return $response;
