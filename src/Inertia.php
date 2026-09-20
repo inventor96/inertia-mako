@@ -102,10 +102,6 @@ class Inertia {
 		// include the keys as sharedProps
 		$this->share_keys = [
 			...array_keys($data),
-
-			// include Mako View Factory values
-			'__charset__',
-			'__viewfactory__',
 		];
 
 		// return the final set
